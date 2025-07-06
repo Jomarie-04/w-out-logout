@@ -7,33 +7,34 @@
 
 /* Base Body Styles */
 body {
-    font-family: 'Inter', sans-serif; /* Changed to Inter to match HTML link */
+    font-family: 'Inter', sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #FFD1DC, #AEC6CF);
+    background: linear-gradient(to right, #168EF7, #8443E4);
     /* Smooth scroll for anchor links */
     scroll-behavior: smooth;
 }
 
-/* --- INSECURE CLIENT-SIDE LOGIN STYLES --- */
+/* --- REMOVED INSECURE CLIENT-SIDE LOGIN STYLES --- */
+/*
 #login-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, #FFD1DC, #AEC6CF);
+    background: linear-gradient(to right, #168EF7, #8443E4);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Ensures it's on top of everything */
+    z-index: 9999;
 }
 
 .login-container {
-    background: linear-gradient(to right, #AEC6CF, #FFD1DC);
+    background: linear-gradient(to right, #0078E1, #823FE6);
     padding: 40px 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -44,7 +45,7 @@ body {
 
 .login-container h2 {
     margin-bottom: 25px;
-    color: #222;
+    color: #ffffff;
     font-size: 2em;
 }
 
@@ -57,8 +58,8 @@ body {
 #login-form label {
     text-align: left;
     font-weight: bold;
-    color: #555;
-    margin-bottom: -10px; /* Pull label closer to input */
+    color: #ffffff;
+    margin-bottom: -10px;
 }
 
 #login-form input[type="text"],
@@ -94,7 +95,7 @@ body {
 }
 
 .security-warning {
-    color: #d9534f; /* Red color for warning */
+    color: #d9534f;
     font-size: 0.8em;
     margin-top: 20px;
     border: 1px solid #d9534f;
@@ -102,11 +103,14 @@ body {
     border-radius: 5px;
     background-color: #fdd;
 }
-/* Hide portfolio content by default until login (handled by JS) */
+*/
+/* Removed: Hide portfolio content by default until login */
+/*
 #portfolio-content.hidden {
     display: none;
 }
-/* --- END OF INSECURE LOGIN STYLES --- */
+*/
+/* --- END OF REMOVED INSECURE LOGIN STYLES --- */
 
 
 /* Navigation Bar Styles */
@@ -162,9 +166,10 @@ footer nav ul li a.active {
     text-decoration: underline;
 }
 
-/* Logout Button Style (added to Navbar) */
+/* Removed: Logout Button Style (was added to Navbar) */
+/*
 .logout-btn {
-    background-color: #666; /* Red color for logout */
+    background-color: #666;
     color: #fff;
     padding: 0.5rem 1rem;
     border: none;
@@ -172,7 +177,7 @@ footer nav ul li a.active {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-left: 15px; /* Add some space from other nav items */
+    margin-left: 15px;
 }
 
 .logout-btn:hover {
@@ -180,12 +185,11 @@ footer nav ul li a.active {
     transform: scale(1.05);
 }
 
-/* Adjust navbar li for button alignment if necessary */
 .navbar ul li .logout-btn {
-    display: block; /* Make it block within the list item for better alignment */
-    line-height: 1.5; /* Align vertically with text links */
+    display: block;
+    line-height: 1.5;
 }
-
+*/
 
 /* --- Keyframe Animations --- */
 /* Fade in from bottom for sections and hero elements */
@@ -392,23 +396,14 @@ section.animate-visible {
     -webkit-columns: 2;
     -moz-columns: 2;
     padding-left: 20px;
+    list-style: none; /* Added this to specifically remove the default dot */
 }
 
 #about li,
 #skills li {
     margin-bottom: 10px;
-    position: relative;
-    padding-left: 25px;
 }
 
-#about li::before,
-#skills li::before {
-    content: '•';
-    color: #007bff;
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-}
 
 /* --- Projects Section --- */
 #projects article {
@@ -604,7 +599,11 @@ footer {
     color: #fff;
     text-align: center;
     padding: 30px 20px;
-    margin-top: 40px;
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
 }
 
 footer p {
@@ -629,7 +628,7 @@ footer nav ul li a:hover {
     color: #007bff;
 }
 
-.social-links a { /* Changed from footer div a to be more specific with a class */
+.social-links a {
     color: #fff;
     margin: 0 10px;
     font-size: 1.1em;
@@ -652,77 +651,155 @@ footer a[href*="terms-privacy"]:hover {
     color: #007bff;
 }
 
-/* --- Family Tree Specific CSS --- */
+/* --- Family Tree Specific CSS - NEW DESIGN --- */
 .family-tree-container {
     position: relative;
-    padding-bottom: 40px;
-    padding-top: 40px;
+    padding: 60px 20px; /* Increased padding */
+    background-color: #f8f9fa; /* Lighter background for the container */
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Stronger shadow */
+    margin-bottom: 30px; /* Space below the tree container */
 }
 
-.parents-row {
+.tree-title {
+    color: #495057; /* Darker, subtle title color */
+    font-size: 2.5em; /* Larger title */
+    margin-bottom: 40px; /* More space below title */
+    font-weight: 700;
+}
+
+.parents-row,
+.children-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Increased gap between members */
+    margin-bottom: 60px; /* Space between rows */
     position: relative;
-    margin-bottom: 80px;
+    z-index: 1; /* Ensure members are above lines */
 }
 
+/* Individual Member Cards */
+.member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff; /* White background for cards */
+    padding: 20px; /* Padding inside cards */
+    border-radius: 15px; /* Very rounded corners for cards */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Shadow for cards */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    width: 160px; /* Fixed width for consistent card size */
+    flex-shrink: 0; /* Prevent shrinking on smaller screens */
+    border: 1px solid #e0e0e0; /* Subtle border */
+}
+
+.member:hover {
+    transform: translateY(-8px); /* Lift effect on hover */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.member img {
+    width: 100px; /* Slightly larger images within cards */
+    height: 100px;
+    border-width: 4px !important; /* Keep border, but make sure it's 4px */
+    margin-bottom: 15px; /* Space between image and name */
+}
+
+.member-name {
+    font-size: 1.1em; /* Slightly larger name font */
+    font-weight: 600; /* Bolder name */
+    color: #343a40; /* Darker name color */
+}
+
+/* Connecting Lines */
+/* Line connecting Father and Mother */
 .parents-row::before {
     content: '';
     position: absolute;
     left: 50%;
+    /* Calculate width and position based on member width and gap */
+    width: calc(160px + 40px); /* 2 * member_width + gap_between_members */
     transform: translateX(-50%);
-    width: 120px; /* Approximate width needed to span between two images with space-x-12 */
-    left: calc(50% - 60px); /* Start 60px left of center */
-    margin-left: -60px; /* To account for width from center */
     top: 50%;
-    height: 2px;
-    background-color: #9CA3AF;
-    transform: translateY(-50%);
+    height: 4px; /* Thicker line */
+    background-color: #868e96; /* Darker grey line */
+    border-radius: 2px; /* Rounded line ends */
     z-index: 0;
 }
 
+/* Vertical line from parents' line to children's line */
 .parents-row::after {
     content: '';
     position: absolute;
-    bottom: -80px;
+    bottom: -60px; /* Adjusted to connect to children's row */
     left: 50%;
-    width: 2px;
-    height: 80px;
-    background-color: #9CA3AF;
+    width: 4px; /* Thicker line */
+    height: 60px; /* Height to span between rows */
+    background-color: #868e96;
+    border-radius: 2px;
     transform: translateX(-50%);
     z-index: 0;
 }
 
-.children-row {
-    position: relative;
-    padding-top: 40px;
-}
-
+/* Horizontal line for children */
 .children-row::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -40px; /* Position above children members */
     left: 50%;
-    width: calc(100% - 100px);
-    height: 2px;
-    background-color: #9CA3AF;
-    transform: translate(-50%, -50%);
+    /* Calculate width based on children members' positions and gaps */
+    width: calc( (160px + 40px) * 2 ); /* (member_width + gap) * (number_of_gaps) */
+    height: 4px; /* Thicker line */
+    background-color: #868e96;
+    border-radius: 2px;
+    transform: translateX(-50%);
     z-index: 0;
 }
 
+/* Vertical lines dropping from each child to the children's horizontal line */
 .children-row .member::after {
     content: '';
     position: absolute;
-    top: -40px;
+    top: -40px; /* From top of member card to horizontal line */
     left: 50%;
-    width: 2px;
-    height: 40px;
-    background-color: #9CA3AF;
+    width: 4px; /* Thicker line */
+    height: 40px; /* Height to connect to horizontal line */
+    background-color: #868e96;
+    border-radius: 2px;
     transform: translateX(-50%);
-    z-index: -1;
+    z-index: -1; /* Behind the member card */
 }
 
-.member {
-    position: relative;
-    z-index: 1;
+/* Adjustments for responsive design */
+@media (max-width: 768px) {
+    .parents-row,
+    .children-row {
+        flex-direction: column; /* Stack members vertically on small screens */
+        align-items: center;
+        gap: 30px; /* Adjust gap for vertical stacking */
+    }
+
+    /* Hide horizontal lines on small screens when stacked vertically */
+    .parents-row::before,
+    .children-row::before {
+        display: none;
+    }
+
+    /* Adjust vertical lines for stacked members */
+    .parents-row::after {
+        height: 40px; /* Shorter line */
+        bottom: -40px;
+    }
+
+    .children-row .member::after {
+        top: -30px; /* Adjust top */
+        height: 30px; /* Shorter line for individual child */
+    }
+
+    .member {
+        width: 80%; /* Make cards wider on small screens */
+        max-width: 250px;
+    }
 }
 
 /* --- Responsive Design (Media Queries) --- */
@@ -776,17 +853,7 @@ footer a[href*="terms-privacy"]:hover {
     #about li,
     #skills li {
         padding-left: 0;
-    }
 
-    #about li::before,
-    #skills li::before {
-        display: none;
-    }
-
-    #projects article a {
-        display: block;
-        margin-bottom: 10px;
-        margin-right: 0;
     }
 
     #contact form {
@@ -798,20 +865,18 @@ footer a[href*="terms-privacy"]:hover {
         gap: 10px;
     }
 
-    .social-links a { /* Changed from footer div a to be more specific */
+    .social-links a {
         display: block;
         margin-bottom: 10px;
     }
 
-    /* Login overlay adjustments for smaller screens */
-    .login-container {
-        padding: 30px 20px;
-    }
-    /* Responsive adjustment for logout button */
+    /* Removed: Responsive adjustment for logout button */
+    /*
     .navbar ul li .logout-btn {
-        margin: 10px 0; /* Align with other nav items when stacked */
-        width: calc(100% - 30px); /* Make it fill available space but respect padding */
+        margin: 10px 0;
+        width: calc(100% - 30px);
     }
+    */
 }
 
 /* For screens smaller than 480px (e.g., small phones) */
@@ -825,13 +890,13 @@ footer a[href*="terms-privacy"]:hover {
     }
 
     .greeting {
-        font-size: 1.8em; /* Adjusted for smaller screens */
+        font-size: 1.8em;
     }
     .name {
-        font-size: 2.5em; /* Adjusted for smaller screens */
+        font-size: 2.5em;
     }
     .role {
-        font-size: 1.2em; /* Adjusted for smaller screens */
+        font-size: 1.2em;
     }
 
     .hero-section img {
@@ -842,9 +907,9 @@ footer a[href*="terms-privacy"]:hover {
     section {
         padding: 30px 10px;
     }
+}
 
-    #resume a {
-        padding: 10px 20px;
-        font-size: 1em;
-    }
+/* NEW RULE: Add padding to portfolio content to prevent fixed footer overlap */
+#portfolio-content {
+    padding-bottom: 150px;
 }

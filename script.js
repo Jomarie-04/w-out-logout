@@ -1,15 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- INSECURE CLIENT-SIDE LOGIN LOGIC ---
-    // DO NOT USE THIS FOR REAL SECURITY. IT CAN BE EASILY BYPASSED.
+    // Removed: INSECURE CLIENT-SIDE LOGIN LOGIC
+    /*
     const loginForm = document.getElementById('login-form');
     const loginOverlay = document.getElementById('login-overlay');
     const portfolioContent = document.getElementById('portfolio-content');
-    const logoutBtn = document.getElementById('logout-btn'); // Get the new logout button
+    const logoutBtn = document.getElementById('logout-btn');
+    */
     const heroElements = document.querySelectorAll('.hero-section .greeting, .hero-section .name, .hero-section .role, .hero-section img');
 
 
-    // Function to show portfolio and animate hero section
+    // Removed: showPortfolioAndAnimateHero function and related checks
+    /*
     const showPortfolioAndAnimateHero = () => {
         loginOverlay.style.display = 'none';
         portfolioContent.classList.remove('hidden');
@@ -18,17 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Check if user is already "logged in" (e.g., from a previous session)
     if (sessionStorage.getItem('loggedIn') === 'true') {
         showPortfolioAndAnimateHero();
     } else {
-        loginOverlay.style.display = 'flex'; // Ensure it's visible if not logged in
-        portfolioContent.classList.add('hidden'); // Ensure content is hidden
+        loginOverlay.style.display = 'flex';
+        portfolioContent.classList.add('hidden');
     }
 
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault();
 
             const usernameInput = document.getElementById('username');
             const passwordInput = document.getElementById('password');
@@ -36,46 +37,45 @@ document.addEventListener('DOMContentLoaded', () => {
             const username = usernameInput.value.trim();
             const password = passwordInput.value.trim();
 
-            // Hardcoded credentials for demonstration (INSECURE!)
             if (username === 'jomarie' && password === 'jomarie4') {
-                sessionStorage.setItem('loggedIn', 'true'); // "Log in" the user
-                showPortfolioAndAnimateHero(); // Show and animate
+                sessionStorage.setItem('loggedIn', 'true');
+                showPortfolioAndAnimateHero();
             } else {
-                // Using a simple alert for demonstration, in a real app, use a custom modal
                 alert('Invalid username or password. (Hint: jomarie / jomarie4)');
-                // Clear password field for security
                 passwordInput.value = '';
             }
         });
     }
 
-    // --- Logout Logic ---
+    // Removed: Logout Logic
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function() {
-            sessionStorage.removeItem('loggedIn'); // Remove the login status
-            loginOverlay.style.display = 'flex'; // Show the login overlay
-            portfolioContent.classList.add('hidden'); // Hide portfolio content
-            // Optional: Scroll to the top of the page after logout
+            sessionStorage.removeItem('loggedIn');
+            loginOverlay.style.display = 'flex';
+            portfolioContent.classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Remove animation classes from hero elements so they can animate again on next login
             heroElements.forEach(element => {
                 element.classList.remove('animate-visible');
             });
         });
     }
+    */
 
+    // --- Directly trigger hero animation on page load since there's no login ---
+    heroElements.forEach(element => {
+        element.classList.add('animate-visible');
+    });
 
     // --- Smooth scroll for internal anchor links ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault(); // Prevent default jump behavior
+            e.preventDefault();
 
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                // Adjust scroll position to account for fixed navbar height
                 const navbarHeight = document.querySelector('.navbar').offsetHeight;
                 const offsetTop = targetElement.offsetTop - navbarHeight;
 
@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Form validation for contact form ---
+    // Make sure your HTML <form> in the contact section has id="contact-form"
     const contactForm = document.querySelector('#contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -112,27 +113,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Intersection Observer for "on-scroll" animations ---
-    // Note: Hero elements are now handled by showPortfolioAndAnimateHero() on load/login
-    const animatedSections = document.querySelectorAll('section'); // Only observe sections here
+    const animatedSections = document.querySelectorAll('section');
 
     const observerOptions = {
-        root: null, // Use the viewport as the root
+        root: null,
         rootMargin: '0px',
-        threshold: 0.1 // Trigger when 10% of the element is visible
+        threshold: 0.1
     };
 
     const elementObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Add a class that triggers the CSS animation
                 entry.target.classList.add('animate-visible');
-                // Stop observing once animated if you only want it to animate once
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe each relevant section
     animatedSections.forEach(element => {
         elementObserver.observe(element);
     });
@@ -146,11 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         let currentSectionId = '';
         const scrollY = window.pageYOffset;
-        const navbarHeight = mainNavbar.offsetHeight; // Get current navbar height
+        const navbarHeight = mainNavbar.offsetHeight;
 
         sections.forEach(section => {
-            // Adjust sectionTop to account for navbar height, so activation is accurate
-            const sectionTop = section.offsetTop - navbarHeight - 50; // Added extra 50px buffer
+            const sectionTop = section.offsetTop - navbarHeight - 50;
             const sectionHeight = section.offsetHeight;
 
             if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
@@ -159,10 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         navLinks.forEach(link => {
-            // Ensure the logout button isn't accidentally styled as active
-            if (!link.classList.contains('logout-btn')) { // Exclude logout button
-                link.classList.remove('active');
-            }
+            link.classList.remove('active'); // No need to exclude logout button anymore
             if (link.getAttribute('href') === `#${currentSectionId}`) {
                 link.classList.add('active');
             }
